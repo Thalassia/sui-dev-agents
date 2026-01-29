@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-frontend-subagent",
+  "name": "sui frontend Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-frontend skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-frontend",
+  "reports_to": [
+    "sui-development-agent"
+  ],
+  "prompt_template": "Execute the sui-frontend skill following its instructions exactly. Report progress to sui-development-agent. Update state file after completion."
+}

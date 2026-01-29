@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-zklogin-subagent",
+  "name": "sui zklogin Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-zklogin skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-zklogin",
+  "reports_to": [
+    "sui-ecosystem-agent"
+  ],
+  "prompt_template": "Execute the sui-zklogin skill following its instructions exactly. Report progress to sui-ecosystem-agent. Update state file after completion."
+}

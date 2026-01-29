@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-kiosk-subagent",
+  "name": "sui kiosk Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-kiosk skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-kiosk",
+  "reports_to": [
+    "sui-ecosystem-agent"
+  ],
+  "prompt_template": "Execute the sui-kiosk skill following its instructions exactly. Report progress to sui-ecosystem-agent. Update state file after completion."
+}

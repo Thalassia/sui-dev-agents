@@ -1,0 +1,28 @@
+{
+  "agent_id": "sui-infrastructure-agent",
+  "name": "SUI Infrastructure Services Agent",
+  "version": "1.0.0",
+  "description": "Provides documentation queries and security scanning services to other agents.",
+  "capabilities": [
+    "documentation_query",
+    "security_scanning",
+    "service_provision"
+  ],
+  "can_delegate_to": [
+    "sui-docs-query-subagent",
+    "sui-security-guard-subagent"
+  ],
+  "reports_to": [
+    "sui-supreme",
+    "sui-core-agent"
+  ],
+  "provides_services_to": [
+    "sui-development-agent",
+    "sui-ecosystem-agent"
+  ],
+  "skills_available": [
+    "sui-docs-query",
+    "sui-security-guard"
+  ],
+  "prompt_template": "./sui-infrastructure-agent-prompt.md"
+}

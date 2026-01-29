@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-docs-query-subagent",
+  "name": "sui docs query Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-docs-query skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-docs-query",
+  "reports_to": [
+    "sui-infrastructure-agent"
+  ],
+  "prompt_template": "Execute the sui-docs-query skill following its instructions exactly. Report progress to sui-infrastructure-agent. Update state file after completion."
+}

@@ -1,0 +1,31 @@
+{
+  "agent_id": "sui-supreme",
+  "name": "SUI Supreme Orchestrator",
+  "version": "1.0.0",
+  "description": "Top-level agent for orchestrating all SUI development tasks. Analyzes requests, decomposes into subtasks, delegates to category agents, and maintains global state.",
+  "capabilities": [
+    "task_decomposition",
+    "agent_routing",
+    "state_management",
+    "decision_making",
+    "cross_category_coordination",
+    "progress_tracking"
+  ],
+  "can_delegate_to": [
+    "sui-core-agent",
+    "sui-infrastructure-agent",
+    "sui-development-agent",
+    "sui-ecosystem-agent"
+  ],
+  "tools_available": [
+    "Task",
+    "Skill",
+    "Read",
+    "Write",
+    "Glob",
+    "Grep",
+    "Bash"
+  ],
+  "state_schema": "./state-schema.json",
+  "prompt_template": "./sui-supreme-prompt.md"
+}

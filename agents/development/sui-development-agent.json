@@ -1,0 +1,36 @@
+{
+  "agent_id": "sui-development-agent",
+  "name": "SUI Development Workflows Agent",
+  "version": "1.0.0",
+  "description": "Executes development lifecycle from architecture to deployment.",
+  "capabilities": [
+    "architecture_design",
+    "move_development",
+    "frontend_development",
+    "testing",
+    "deployment"
+  ],
+  "can_delegate_to": [
+    "sui-architect-subagent",
+    "sui-developer-subagent",
+    "sui-frontend-subagent",
+    "sui-tester-subagent",
+    "sui-deployer-subagent"
+  ],
+  "reports_to": [
+    "sui-supreme",
+    "sui-core-agent"
+  ],
+  "coordinates_with": [
+    "sui-infrastructure-agent",
+    "sui-ecosystem-agent"
+  ],
+  "skills_available": [
+    "sui-architect",
+    "sui-developer",
+    "sui-frontend",
+    "sui-tester",
+    "sui-deployer"
+  ],
+  "prompt_template": "./sui-development-agent-prompt.md"
+}

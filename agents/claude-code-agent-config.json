@@ -1,0 +1,64 @@
+{
+  "custom_agents": [
+    {
+      "subagent_type": "sui-supreme",
+      "description": "SUI Supreme Orchestrator - Top-level task decomposition and orchestration for all SUI development",
+      "prompt_file": "agents/supreme/sui-supreme-prompt.md",
+      "tools": ["Task", "Skill", "Read", "Write", "Glob", "Grep", "Bash"]
+    },
+    {
+      "subagent_type": "sui-core-agent",
+      "description": "SUI Core Workflows - Orchestrate complete full-stack SUI projects",
+      "prompt_file": "agents/core/sui-core-agent-prompt.md",
+      "tools": ["Task", "Skill", "Read", "Write"]
+    },
+    {
+      "subagent_type": "sui-infrastructure-agent",
+      "description": "SUI Infrastructure Services - Documentation queries and security scanning",
+      "prompt_file": "agents/infrastructure/sui-infrastructure-agent-prompt.md",
+      "tools": ["Task", "Skill", "Read", "Grep", "Bash"]
+    },
+    {
+      "subagent_type": "sui-development-agent",
+      "description": "SUI Development Workflows - Execute development lifecycle from architecture to deployment",
+      "prompt_file": "agents/development/sui-development-agent-prompt.md",
+      "tools": ["Task", "Skill", "Read", "Write", "Edit", "Bash"]
+    },
+    {
+      "subagent_type": "sui-ecosystem-agent",
+      "description": "SUI Ecosystem Integrations - Integrate with SUI ecosystem services and protocols",
+      "prompt_file": "agents/ecosystem/sui-ecosystem-agent-prompt.md",
+      "tools": ["Task", "Skill", "Read", "Write"]
+    },
+    {
+      "subagent_type": "sui-architect-subagent",
+      "description": "Execute sui-architect skill - Generate architecture specifications",
+      "prompt_file": "agents/subagents/sui-architect-subagent-prompt.md",
+      "tools": ["Skill", "Read", "Write", "AskUserQuestion"]
+    },
+    {
+      "subagent_type": "sui-developer-subagent",
+      "description": "Execute sui-developer skill - Generate Move smart contract code with quality checks",
+      "prompt_file": "agents/subagents/sui-developer-subagent-prompt.md",
+      "tools": ["Skill", "Read", "Write", "Edit", "Bash"]
+    },
+    {
+      "subagent_type": "sui-frontend-subagent",
+      "description": "Execute sui-frontend skill - Build TypeScript frontend with React and SDK integration",
+      "prompt_file": "agents/subagents/sui-frontend-subagent-prompt.md",
+      "tools": ["Skill", "Read", "Write", "Edit", "Bash"]
+    },
+    {
+      "subagent_type": "sui-tester-subagent",
+      "description": "Execute sui-tester skill - Comprehensive testing strategy execution",
+      "prompt_file": "agents/subagents/sui-tester-subagent-prompt.md",
+      "tools": ["Skill", "Read", "Bash"]
+    },
+    {
+      "subagent_type": "sui-deployer-subagent",
+      "description": "Execute sui-deployer skill - Staged deployment orchestration",
+      "prompt_file": "agents/subagents/sui-deployer-subagent-prompt.md",
+      "tools": ["Skill", "Bash", "AskUserQuestion"]
+    }
+  ]
+}

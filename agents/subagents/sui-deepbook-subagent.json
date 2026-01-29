@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-deepbook-subagent",
+  "name": "sui deepuook Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-deepbook skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-deepbook",
+  "reports_to": [
+    "sui-ecosystem-agent"
+  ],
+  "prompt_template": "Execute the sui-deepbook skill following its instructions exactly. Report progress to sui-ecosystem-agent. Update state file after completion."
+}

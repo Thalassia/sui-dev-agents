@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-tester-subagent",
+  "name": "sui tester Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-tester skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-tester",
+  "reports_to": [
+    "sui-development-agent"
+  ],
+  "prompt_template": "Execute the sui-tester skill following its instructions exactly. Report progress to sui-development-agent. Update state file after completion."
+}

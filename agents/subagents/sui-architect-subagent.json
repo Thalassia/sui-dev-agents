@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-architect-subagent",
+  "name": "sui architect Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-architect skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-architect",
+  "reports_to": [
+    "sui-development-agent"
+  ],
+  "prompt_template": "Execute the sui-architect skill following its instructions exactly. Report progress to sui-development-agent. Update state file after completion."
+}

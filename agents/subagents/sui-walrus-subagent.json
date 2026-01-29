@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-walrus-subagent",
+  "name": "sui walrus Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-walrus skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-walrus",
+  "reports_to": [
+    "sui-ecosystem-agent"
+  ],
+  "prompt_template": "Execute the sui-walrus skill following its instructions exactly. Report progress to sui-ecosystem-agent. Update state file after completion."
+}

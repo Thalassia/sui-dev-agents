@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SUI Supreme Global State",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["DeFi", "NFT", "GameFi", "DAO", "Infrastructure", "Custom"]
+        },
+        "phase": {
+          "type": "string",
+          "enum": ["planning", "architecture", "development", "testing", "deployment", "complete"]
+        },
+        "started_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "type", "phase"]
+    },
+    "agents": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["idle", "working", "waiting", "error", "complete"]
+            },
+            "current_task": { "type": ["string", "null"] },
+            "last_update": { "type": "string", "format": "date-time" },
+            "progress": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "package_ids": {
+          "type": "object",
+          "properties": {
+            "devnet": { "type": "string" },
+            "testnet": { "type": "string" },
+            "mainnet": { "type": "string" }
+          }
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["kiosk", "walrus", "zklogin", "passkey", "oracle", "deepbook", "nft-protocol", "multisig"]
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "specs": { "type": "array", "items": { "type": "string" } },
+        "contracts": { "type": "array", "items": { "type": "string" } },
+        "tests": { "type": "array", "items": { "type": "string" } },
+        "deployed_packages": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "required": ["project", "agents", "dependencies", "artifacts"]
+}

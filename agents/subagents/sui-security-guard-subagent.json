@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-security-guard-subagent",
+  "name": "sui security guard Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-security-guard skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-security-guard",
+  "reports_to": [
+    "sui-infrastructure-agent"
+  ],
+  "prompt_template": "Execute the sui-security-guard skill following its instructions exactly. Report progress to sui-infrastructure-agent. Update state file after completion."
+}

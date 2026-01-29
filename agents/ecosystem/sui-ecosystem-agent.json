@@ -1,0 +1,43 @@
+{
+  "agent_id": "sui-ecosystem-agent",
+  "name": "SUI Ecosystem Integrations Agent",
+  "version": "1.0.0",
+  "description": "Integrates with SUI ecosystem services and protocols.",
+  "capabilities": [
+    "ecosystem_integration",
+    "integration_coordination",
+    "pattern_generation"
+  ],
+  "can_delegate_to": [
+    "sui-kiosk-subagent",
+    "sui-walrus-subagent",
+    "sui-zklogin-subagent",
+    "sui-passkey-subagent",
+    "sui-oracle-subagent",
+    "sui-deepbook-subagent",
+    "sui-nft-protocol-subagent",
+    "sui-multisig-subagent",
+    "sui-fullstack-integration-subagent"
+  ],
+  "reports_to": [
+    "sui-supreme",
+    "sui-core-agent",
+    "sui-development-agent"
+  ],
+  "coordinates_with": [
+    "sui-development-agent",
+    "sui-infrastructure-agent"
+  ],
+  "skills_available": [
+    "sui-kiosk",
+    "sui-walrus",
+    "sui-zklogin",
+    "sui-passkey",
+    "sui-oracle",
+    "sui-deepbook",
+    "sui-nft-protocol",
+    "sui-multisig",
+    "sui-fullstack-integration"
+  ],
+  "prompt_template": "./sui-ecosystem-agent-prompt.md"
+}

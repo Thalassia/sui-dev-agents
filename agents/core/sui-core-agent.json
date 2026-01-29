@@ -1,0 +1,26 @@
+{
+  "agent_id": "sui-core-agent",
+  "name": "SUI Core Workflows Agent",
+  "version": "1.0.0",
+  "description": "Orchestrates complete full-stack SUI projects from architecture to deployment.",
+  "capabilities": [
+    "fullstack_orchestration",
+    "phase_coordination",
+    "project_state_management"
+  ],
+  "can_delegate_to": [
+    "sui-full-stack-subagent"
+  ],
+  "reports_to": [
+    "sui-supreme"
+  ],
+  "coordinates_with": [
+    "sui-development-agent",
+    "sui-infrastructure-agent",
+    "sui-ecosystem-agent"
+  ],
+  "skills_available": [
+    "sui-full-stack"
+  ],
+  "prompt_template": "./sui-core-agent-prompt.md"
+}

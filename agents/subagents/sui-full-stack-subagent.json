@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-full-stack-subagent",
+  "name": "sui full stack Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-full-stack skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-full-stack",
+  "reports_to": [
+    "sui-core-agent"
+  ],
+  "prompt_template": "Execute the sui-full-stack skill following its instructions exactly. Report progress to sui-core-agent. Update state file after completion."
+}

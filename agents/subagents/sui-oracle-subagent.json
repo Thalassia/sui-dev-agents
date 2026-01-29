@@ -1,0 +1,16 @@
+{
+  "agent_id": "sui-oracle-subagent",
+  "name": "sui oracle Subagent",
+  "version": "1.0.0",
+  "description": "Executes the sui-oracle skill.",
+  "capabilities": [
+    "skill_execution",
+    "progress_reporting",
+    "state_updates"
+  ],
+  "skill": "sui-oracle",
+  "reports_to": [
+    "sui-ecosystem-agent"
+  ],
+  "prompt_template": "Execute the sui-oracle skill following its instructions exactly. Report progress to sui-ecosystem-agent. Update state file after completion."
+}

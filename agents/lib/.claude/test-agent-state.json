@@ -1,0 +1,18 @@
+{
+  "project": {
+    "name": "existing",
+    "type": "DeFi",
+    "phase": "development"
+  },
+  "agents": {},
+  "dependencies": {
+    "package_ids": {},
+    "integrations": []
+  },
+  "artifacts": {
+    "specs": [],
+    "contracts": [],
+    "tests": [],
+    "deployed_packages": []
+  }
+}
