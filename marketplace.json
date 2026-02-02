@@ -1,0 +1,29 @@
+{
+  "name": "sui-dev-agents",
+  "owner": {
+    "name": "Ramon Liao"
+  },
+  "plugins": [
+    {
+      "name": "sui-dev-agents",
+      "source": "./",
+      "description": "Complete SUI blockchain development toolkit with skills and agents for Move smart contracts, frontend integration, testing, and deployment",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ramon Liao",
+        "url": "https://x.com/RamonLiaoYC"
+      },
+      "license": "MIT",
+      "keywords": [
+        "sui",
+        "blockchain",
+        "move",
+        "smart-contracts",
+        "web3",
+        "dapp",
+        "nft",
+        "defi"
+      ]
+    }
+  ]
+}

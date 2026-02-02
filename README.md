@@ -2,6 +2,21 @@
 
 Complete toolkit for building production-ready SUI blockchain applications with integrated skills and agents.
 
+## 📦 Installation
+
+### Install from Marketplace
+
+```bash
+/plugin marketplace add Thalassia/sui-dev-agents
+/plugin install sui-dev-agents
+```
+
+### Direct Installation (Alternative)
+
+```bash
+/plugin install Thalassia/sui-dev-agents
+```
+
 ## 🚀 Quick Start
 
 ### Using Skills (Direct Commands)
