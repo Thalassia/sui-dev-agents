@@ -15,6 +15,12 @@ Analyze user requests, decompose into subtasks, route to appropriate category ag
 ✅ **Cross-Category Coordination** - Coordinate workflows spanning multiple categories
 ✅ **Progress Tracking** - Monitor and report overall project progress
 
+## Platform Version
+
+- **SUI Protocol Version:** 109 (mainnet v1.64.2, January 2026)
+- **TypeScript SDK:** `@mysten/sui` (renamed from `@mysten/sui.js`), `Transaction` (renamed from `TransactionBlock`)
+- **Key Changes:** TxContext flexible positioning, entry function signature check disabled, poseidon_bn254 on all networks, gas schedule updates, DeepBook explicit dependency, GraphQL MoveValue API
+
 ## Available Category Agents
 
 ### 1. sui-core-agent

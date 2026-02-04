@@ -89,10 +89,10 @@ module marketplace::listing {
     ///
     /// # Frontend Usage
     /// ```typescript
-    /// const txb = new TransactionBlock();
-    /// txb.moveCall({
+    /// const tx = new Transaction();
+    /// tx.moveCall({
     ///   target: `${PACKAGE_ID}::listing::create_listing`,
-    ///   arguments: [txb.object(nftId), txb.pure(price)]
+    ///   arguments: [tx.object(nftId), tx.pure(price)]
     /// });
     /// ```
     public fun create_listing<T: key + store>(
@@ -348,22 +348,22 @@ export interface NFTPurchased {
 export function create_listing(
   nft: any,
   price: number | bigint,
-): TransactionBlock {
-  const txb = new TransactionBlock();
-  txb.moveCall({
+): Transaction {
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::listing::create_listing`,
-    arguments: [txb.object(nft), txb.pure(price)],
+    arguments: [tx.object(nft), tx.pure(price)],
   });
   return txb;
 }
 
 export function cancel_listing(
   listing_id: string,
-): TransactionBlock {
-  const txb = new TransactionBlock();
-  txb.moveCall({
+): Transaction {
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::listing::cancel_listing`,
-    arguments: [txb.object(listing_id)],
+    arguments: [tx.object(listing_id)],
   });
   return txb;
 }
@@ -371,11 +371,11 @@ export function cancel_listing(
 export function buy_from_listing(
   listing_id: string,
   payment: any,
-): TransactionBlock {
-  const txb = new TransactionBlock();
-  txb.moveCall({
+): Transaction {
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::listing::buy_from_listing`,
-    arguments: [txb.object(listing_id), txb.object(payment)],
+    arguments: [tx.object(listing_id), tx.object(payment)],
   });
   return txb;
 }
@@ -635,18 +635,18 @@ sui-developer gen-types
 ```typescript
 import { create_listing, subscribeToListingCreated } from './types/marketplace';
 import { useWallet } from '@mysten/dapp-kit';
-import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { Transaction } from '@mysten/sui/transactions';
 
 export function CreateListingButton({ nftId, price }: Props) {
-  const { signAndExecuteTransactionBlock } = useWallet();
+  const { signAndExecuteTransaction } = useWallet();
 
   const handleCreateListing = async () => {
     // Use generated function
     const txb = create_listing(nftId, price);
 
     // Execute transaction
-    const result = await signAndExecuteTransactionBlock({
-      transactionBlock: txb,
+    const result = await signAndExecuteTransaction({
+      transaction: tx,
     });
 
     console.log('Listing created:', result.digest);

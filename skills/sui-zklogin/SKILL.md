@@ -62,8 +62,8 @@ async function handleCallback() {
 }
 
 // 3. Sign transactions
-async function signTransaction(txb: TransactionBlock) {
-  const signedTx = await zkLogin.signTransaction(txb);
+async function signTransaction(tx: Transaction) {
+  const signedTx = await zkLogin.signTransaction(tx);
   return signedTx;
 }
 ```
@@ -92,7 +92,7 @@ public fun create_profile(
 // Complete zkLogin implementation
 
 import { ZkLoginProvider, generateNonce } from '@mysten/zklogin';
-import { SuiClient } from '@mysten/sui.js/client';
+import { SuiClient } from '@mysten/sui/client';
 
 class ZkLoginAuth {
   private provider: ZkLoginProvider;
@@ -143,10 +143,10 @@ class ZkLoginAuth {
     return { address, proof };
   }
 
-  async signAndExecuteTransaction(txb: TransactionBlock) {
+  async signAndExecuteTransaction(tx: Transaction) {
     const proof = JSON.parse(localStorage.getItem('zklogin_proof')!);
 
-    const signed = await this.provider.signTransaction(txb, proof);
+    const signed = await this.provider.signTransaction(tx, proof);
 
     const result = await this.client.executeTransactionBlock({
       transactionBlock: signed,

@@ -16,6 +16,16 @@ DeepBook provides:
 - Liquidity incentives
 - Market making tools
 
+## Important: Explicit Dependency Required
+
+Since SUI v1.47, **DeepBook is no longer included as an implicit dependency**. You must add it explicitly in your `Move.toml`:
+
+```toml
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "mainnet-v1.64.2" }
+DeepBook = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/deepbook", rev = "mainnet-v1.64.2" }
+```
+
 ## Use Cases
 
 - DEX with orderbook
@@ -72,28 +82,28 @@ public fun place_limit_order<BaseAsset, QuoteAsset>(
 ### Place Order from UI
 
 ```typescript
-import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { Transaction } from '@mysten/sui/transactions';
 
 async function placeBuyOrder(
   poolId: string,
   price: number,
   quantity: number
 ) {
-  const txb = new TransactionBlock();
+  const tx = new Transaction();
 
-  txb.moveCall({
+  tx.moveCall({
     target: `${DEEPBOOK_PACKAGE}::clob_v2::place_limit_order`,
     arguments: [
-      txb.object(poolId),
-      txb.pure(price),
-      txb.pure(quantity),
-      txb.pure(true), // is_bid
-      txb.object(accountCapId)
+      tx.object(poolId),
+      tx.pure(price),
+      tx.pure(quantity),
+      tx.pure(true), // is_bid
+      tx.object(accountCapId)
     ],
     typeArguments: ['0x2::sui::SUI', '0x...::USDC']
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 ```
 

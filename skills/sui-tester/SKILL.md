@@ -16,6 +16,15 @@ This skill provides comprehensive testing across all layers:
 - **Property-Based Tests** - Test invariants with random inputs
 - **Gas Benchmarks** - Measure and track gas consumption
 
+## SUI v1.64 Testing Updates
+
+**Key changes affecting testing (January 2026):**
+- **Regex Test Filtering:** Test filtering now uses regex instead of substring matching. Use `sui move test --filter "regex_pattern"` for precise test selection.
+- **Gas Schedule Changes (v1.62):** Dynamic field operations have new costs. First-time loads cost more, repeated access is cheaper. Median gas decrease ~21.5%. Update gas benchmarks accordingly.
+- **poseidon_bn254:** Now available on all networks. Add tests for ZK-related functions using `sui::poseidon::poseidon_bn254`.
+- **TxContext Flexible Positioning:** `TxContext` can now be in any argument position. Update integration tests if they assume last-position TxContext.
+- **Entry Function Changes:** Signature check for entry functions is disabled. Non-public entry functions cannot have hot-potato-entangled arguments.
+
 ## Quick Start
 
 ```bash
@@ -28,8 +37,11 @@ sui move test --coverage
 # Generate coverage report
 sui move coverage summary
 
-# Run specific test
-sui move test test_create_listing
+# Run specific test (now uses regex!)
+sui move test --filter "test_create_listing"
+
+# Run all tests matching pattern
+sui move test --filter "test_.*listing"
 ```
 
 ## Test Types

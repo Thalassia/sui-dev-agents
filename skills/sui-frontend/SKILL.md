@@ -11,12 +11,31 @@ description: Use when building SUI frontend applications, integrating wallet con
 
 This skill provides comprehensive frontend development support for SUI applications:
 - Project setup (React/Next.js/Vue/Svelte)
-- @mysten/sui.js SDK integration
+- @mysten/sui SDK integration
 - @mysten/dapp-kit React hooks
 - Multi-wallet support
 - Transaction building and signing
 - Event listening and real-time updates
 - State management patterns
+
+## SUI SDK & API Updates (v1.64, January 2026)
+
+**Breaking SDK changes:**
+- **Package renamed:** `@mysten/sui.js` → `@mysten/sui` (update all imports)
+- **Transaction class renamed:** `TransactionBlock` → `Transaction`
+- **Hook renamed:** `useSignAndExecuteTransactionBlock` → `useSignAndExecuteTransaction`
+- **Import paths:** `@mysten/sui/client`, `@mysten/sui/transactions` (no `.js`)
+
+**GraphQL API changes (v1.64):**
+- `Query.node(id: ID!)` for Global Identification Specification (Relay support)
+- `effectsJson` / `transactionJson` fields for JSON blob returns
+- `MoveValue.extract`, `MoveValue.format`, `MoveValue.asAddress` for value manipulation
+- `Balance.totalBalance` now sums owned coins + accumulator objects; use `Balance.coinBalance` for previous behavior
+- SuiNS: `Query.suinsName` → `Query.address(name: ...)`, `defaultSuinsName` → `defaultNameRecord.target`
+- Single "rich query" limit enforces database request budgets per GraphQL request
+- `DynamicFieldName.literal` for providing dynamic field names as Display v2 literals
+
+**TxContext flexibility:** `TxContext` arguments can now appear in any position in PTBs.
 
 ## Quick Start
 
@@ -37,8 +56,8 @@ npm create vite@latest my-sui-dapp -- --template react-ts
 
 cd my-sui-dapp
 
-# Install SUI dependencies
-npm install @mysten/sui.js @mysten/dapp-kit
+# Install SUI dependencies (note: package is @mysten/sui, not @mysten/sui.js)
+npm install @mysten/sui @mysten/dapp-kit
 
 # Install state management
 npm install @tanstack/react-query zustand
@@ -75,7 +94,7 @@ frontend/
 
 ```typescript
 // src/config/sui.ts
-import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
+import { getFullnodeUrl, SuiClient } from '@mysten/sui/client';
 import { createNetworkConfig } from '@mysten/dapp-kit';
 
 const { networkConfig, useNetworkVariable } = createNetworkConfig({
@@ -146,21 +165,21 @@ export function ConnectWallet() {
 
 ```typescript
 // src/api/marketplace.ts
-import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { Transaction } from '@mysten/sui/transactions';
 
 export class MarketplaceAPI {
   static createListing(params: { nftId: string; price: number | bigint }) {
-    const txb = new TransactionBlock();
+    const tx = new Transaction();
 
-    txb.moveCall({
+    tx.moveCall({
       target: `${packageId}::listing::create_listing`,
       arguments: [
-        txb.object(params.nftId),
-        txb.pure(params.price, 'u64'),
+        tx.object(params.nftId),
+        tx.pure(params.price, 'u64'),
       ],
     });
 
-    return txb;
+    return tx;
   }
 }
 ```
@@ -169,16 +188,16 @@ export class MarketplaceAPI {
 
 ```typescript
 // src/hooks/useMarketplace.ts
-import { useSignAndExecuteTransactionBlock } from '@mysten/dapp-kit';
+import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { useMutation } from '@tanstack/react-query';
 
 export function useCreateListing() {
-  const { mutateAsync: signAndExecute } = useSignAndExecuteTransactionBlock();
+  const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
 
   return useMutation({
     mutationFn: async (params: { nftId: string; price: number }) => {
-      const txb = MarketplaceAPI.createListing(params);
-      return await signAndExecute({ transactionBlock: txb });
+      const tx = MarketplaceAPI.createListing(params);
+      return await signAndExecute({ transaction: tx });
     },
     onSuccess: () => {
       toast.success('Listing created successfully!');
@@ -330,12 +349,12 @@ export function useMultipleNFTs(nftIds: string[]) {
 const ADMIN_PRIVATE_KEY = 'suiprivkey1...';
 
 // ✅ GOOD - Use wallet for signing
-const { mutate: signTransaction } = useSignAndExecuteTransactionBlock();
+const { mutate: signTransaction } = useSignAndExecuteTransaction();
 
 // ⚠️ NEVER trust user input
 // ✅ GOOD - Validate first
 const validatedAmount = validateAmount(userInput);
-txb.pure(validatedAmount, 'u64');
+tx.pure(validatedAmount, 'u64');
 ```
 
 ## Common Mistakes
@@ -346,7 +365,7 @@ txb.pure(validatedAmount, 'u64');
 
 ❌ **Passing numbers as transaction arguments**
 - **Problem:** Transaction fails with "invalid argument type"
-- **Fix:** Use `txb.pure(value, 'u64')` for integers, `txb.pure(value, 'u128')` for large numbers
+- **Fix:** Use `tx.pure(value, 'u64')` for integers, `tx.pure(value, 'u128')` for large numbers
 
 ❌ **Not enabling query options**
 - **Problem:** Object returned without content/owner data

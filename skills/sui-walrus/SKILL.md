@@ -91,12 +91,12 @@ async function uploadNFTMetadata(file: File) {
   const blobId = await client.upload(file);
 
   // Store in Move contract
-  const txb = new TransactionBlock();
-  txb.moveCall({
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::nft::create_nft`,
     arguments: [
-      txb.pure('My NFT'),
-      txb.pure(Array.from(Buffer.from(blobId, 'hex')))
+      tx.pure('My NFT'),
+      tx.pure(Array.from(Buffer.from(blobId, 'hex')))
     ]
   });
 

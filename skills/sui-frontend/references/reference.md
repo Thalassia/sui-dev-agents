@@ -2,7 +2,9 @@
 
 Complete SDK API reference and advanced patterns.
 
-## @mysten/sui.js SDK Reference
+## @mysten/sui SDK Reference
+
+> **Note:** Package was renamed from `@mysten/sui.js` to `@mysten/sui` in 2025. Update all imports accordingly.
 
 ### SuiClient Methods
 
@@ -13,7 +15,9 @@ Complete SDK API reference and advanced patterns.
 - `executeTransactionBlock(params)` - Execute transaction
 - `subscribeEvent(params)` - Subscribe to events
 
-### TransactionBlock Methods
+### Transaction Methods
+
+> **Note:** `TransactionBlock` was renamed to `Transaction`. Import from `@mysten/sui/transactions`.
 
 - `moveCall(params)` - Call Move function
 - `transferObjects(objects, recipient)` - Transfer objects
@@ -40,8 +44,36 @@ Complete SDK API reference and advanced patterns.
 
 ### Transaction Hooks
 
-- `useSignAndExecuteTransactionBlock()` - Sign and execute transaction
-- `useSignTransactionBlock()` - Sign transaction only
+> **Note:** Hooks were renamed: `useSignAndExecuteTransactionBlock` → `useSignAndExecuteTransaction`
+
+- `useSignAndExecuteTransaction()` - Sign and execute transaction
+- `useSignTransaction()` - Sign transaction only
 - `useSignPersonalMessage()` - Sign message
+
+## GraphQL API (v1.64+)
+
+### New Fields
+
+- `Query.node(id: ID!)` - Global Identification Specification (Relay support)
+- `Query.address(name: ...)` - Resolve SuiNS name (replaces `Query.suinsName`)
+- `Query.nameRecord(name: ...)` - Fetch SuiNS NameRecord
+- `TransactionEffects.effectsJson` - Effects as JSON blob
+- `Transaction.transactionJson` - Transaction as JSON blob
+- `TransactionEffects.balanceChangeEffectJson` - Balance changes as JSON blob
+- `MoveValue.extract(expr)` - Extract sub-slice using Display v2 expression
+- `MoveValue.format(expr)` - Format using single format string
+- `MoveValue.asAddress` - Coerce MoveValue to Address
+- `DynamicFieldName.literal` - Provide dynamic field name as Display v2 literal
+
+### Breaking Changes
+
+- `Epoch.systemState` now returns `MoveValue` (replaces individual system state fields)
+- `ValidatorSet.contents` returns `MoveValue` (replaces most fields)
+- `Validator.contents` returns `MoveValue` (replaces most fields)
+- `Balance.totalBalance` now sums owned coins + accumulator objects
+  - Use `Balance.coinBalance` for previous coin-only behavior
+  - Use `Balance.addressBalance` for address-specific balance
+- `IAddressable.defaultSuinsName` → `IAddressable.defaultNameRecord.target`
+- Single "rich query" limit enforces database request budgets
 
 See examples.md for complete usage patterns.

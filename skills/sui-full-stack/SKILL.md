@@ -57,7 +57,7 @@ sui-full-stack --stage testing
 ### Phase 3: Frontend Development (Optional)
 
 - Call `sui-frontend` to set up React/Next.js/Vue
-- Install `@mysten/sui.js`, `@mysten/dapp-kit`
+- Install `@mysten/sui`, `@mysten/dapp-kit`
 - Wallet integration and API wrappers
 - Git checkpoint with frontend commit
 

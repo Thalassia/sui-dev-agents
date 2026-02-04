@@ -1,7 +1,7 @@
 {
   "name": "sui-dev-agents",
   "displayName": "SUI Dev Agents",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Complete SUI blockchain development toolkit with skills and agents for Move smart contracts, frontend integration, testing, and deployment",
   "longDescription": "SUI Dev Agents provides a comprehensive toolkit for building production-ready SUI blockchain applications. Includes 18 user-invocable skills and 23 orchestration agents covering the complete development lifecycle: architecture planning, Move smart contract development, frontend integration, comprehensive testing, multi-network deployment, and ecosystem integrations (Kiosk, zkLogin, DeepBook, Walrus, SuiNS, etc.).",
   "author": {

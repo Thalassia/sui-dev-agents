@@ -98,16 +98,16 @@ async function submitSealedBid(auctionId: string, amount: number) {
   // Store secret locally for reveal
   localStorage.setItem(`bid_secret_${auctionId}`, secret);
 
-  const txb = new TransactionBlock();
-  txb.moveCall({
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::auction::commit_bid`,
     arguments: [
-      txb.pure(auctionId),
-      txb.pure(Array.from(Buffer.from(commitment, 'hex')))
+      tx.pure(auctionId),
+      tx.pure(Array.from(Buffer.from(commitment, 'hex')))
     ]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 
 // Reveal bid after commit phase
@@ -118,17 +118,17 @@ async function revealBid(auctionId: string, amount: number) {
     throw new Error('Secret not found');
   }
 
-  const txb = new TransactionBlock();
-  txb.moveCall({
+  const tx = new Transaction();
+  tx.moveCall({
     target: `${PACKAGE_ID}::auction::reveal_bid`,
     arguments: [
-      txb.pure(auctionId),
-      txb.pure(amount),
-      txb.pure(Array.from(new TextEncoder().encode(secret)))
+      tx.pure(auctionId),
+      tx.pure(amount),
+      tx.pure(Array.from(new TextEncoder().encode(secret)))
     ]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 ```
 

@@ -218,7 +218,7 @@ Changes:
 
 sui-frontend will:
   1. Set up React/Next.js/Vue project
-  2. Install @mysten/sui.js, @mysten/dapp-kit
+  2. Install @mysten/sui, @mysten/dapp-kit
   3. Generate config files
   4. Create wallet integration
   5. Set up API wrappers

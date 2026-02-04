@@ -65,19 +65,19 @@ public fun bridge_to_ethereum(
 ```typescript
 // Bridge SUI to Ethereum
 async function bridgeToEthereum(amount: number, ethAddress: string) {
-  const txb = new TransactionBlock();
+  const tx = new Transaction();
 
-  const [coin] = txb.splitCoins(txb.gas, [txb.pure(amount)]);
+  const [coin] = tx.splitCoins(tx.gas, [tx.pure(amount)]);
 
-  txb.moveCall({
+  tx.moveCall({
     target: `${NAUTILUS_PACKAGE}::bridge::initiate_withdrawal`,
     arguments: [
       coin,
-      txb.pure(Array.from(Buffer.from(ethAddress.slice(2), 'hex')))
+      tx.pure(Array.from(Buffer.from(ethAddress.slice(2), 'hex')))
     ]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 ```
 

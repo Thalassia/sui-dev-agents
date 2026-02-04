@@ -15,6 +15,22 @@ SuiNS provides:
 - Name ownership and trading
 - Subdomains support
 
+## SUI v1.64 SuiNS API Changes
+
+**GraphQL Breaking Changes (January 2026):**
+- `Query.suinsName(name: ...)` → `Query.address(name: ...)` for resolving SuiNS names
+- `IAddressable.defaultSuinsName` → `IAddressable.defaultNameRecord.target` for reverse lookup
+- New `Query.nameRecord` for fetching the full SuiNS NameRecord for a given name
+
+```graphql
+# Old (deprecated)
+query { suinsName(name: "alice.sui") { address } }
+
+# New (v1.64+)
+query { address(name: "alice.sui") }
+query { nameRecord(name: "alice.sui") { ... } }
+```
+
 ## Use Cases
 
 - User profiles
@@ -74,20 +90,20 @@ async function getName(address: string): Promise<string | null> {
 
 // Register new name
 async function registerName(name: string, years: number) {
-  const txb = new TransactionBlock();
+  const tx = new Transaction();
 
-  const [coin] = txb.splitCoins(txb.gas, [txb.pure(calculateCost(years))]);
+  const [coin] = tx.splitCoins(tx.gas, [tx.pure(calculateCost(years))]);
 
-  txb.moveCall({
+  tx.moveCall({
     target: `${SUINS_PACKAGE}::registry::register`,
     arguments: [
-      txb.pure(name),
-      txb.pure(years),
+      tx.pure(name),
+      tx.pure(years),
       coin
     ]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 ```
 

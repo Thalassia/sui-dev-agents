@@ -79,14 +79,14 @@ async function authenticatePasskey() {
 ### Sign Transaction
 
 ```typescript
-async function signWithPasskey(txb: TransactionBlock) {
+async function signWithPasskey(tx: Transaction) {
   const provider = new PasskeyProvider();
 
   // Get passkey credential
   const credential = await authenticatePasskey();
 
   // Sign transaction
-  const signature = await provider.signTransaction(txb, credential);
+  const signature = await provider.signTransaction(tx, credential);
 
   return signature;
 }
@@ -119,8 +119,8 @@ function usePasskey() {
     }
   };
 
-  const signTransaction = async (txb: TransactionBlock) => {
-    return await signWithPasskey(txb);
+  const signTransaction = async (tx: Transaction) => {
+    return await signWithPasskey(tx);
   };
 
   return { address, isRegistered, register, authenticate, signTransaction };

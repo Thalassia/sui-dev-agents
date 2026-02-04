@@ -80,8 +80,8 @@ function moveTypeToTypeScript(moveType: string): string {
 
 ```typescript
 // frontend/src/api/marketplace.ts
-import { TransactionBlock } from '@mysten/sui.js/transactions';
-import { SuiClient } from '@mysten/sui.js/client';
+import { Transaction } from '@mysten/sui/transactions';
+import { SuiClient } from '@mysten/sui/client';
 import type { Listing } from '../types/contracts';
 
 export class MarketplaceAPI {
@@ -93,14 +93,14 @@ export class MarketplaceAPI {
   /**
    * Create a new listing
    */
-  createListing(params: { nft_id: string; price: number | bigint }): TransactionBlock {
-    const txb = new TransactionBlock();
+  createListing(params: { nft_id: string; price: number | bigint }): Transaction {
+    const tx = new Transaction();
 
-    txb.moveCall({
+    tx.moveCall({
       target: `${this.packageId}::listing::create_listing`,
       arguments: [
-        txb.object(params.nft_id),
-        txb.pure(params.price, 'u64'),
+        tx.object(params.nft_id),
+        tx.pure(params.price, 'u64'),
       ],
     });
 
@@ -110,14 +110,14 @@ export class MarketplaceAPI {
   /**
    * Buy NFT from listing
    */
-  buyFromListing(params: { listing_id: string; payment: string }): TransactionBlock {
-    const txb = new TransactionBlock();
+  buyFromListing(params: { listing_id: string; payment: string }): Transaction {
+    const tx = new Transaction();
 
-    txb.moveCall({
+    tx.moveCall({
       target: `${this.packageId}::listing::buy_from_listing`,
       arguments: [
-        txb.object(params.listing_id),
-        txb.object(params.payment),
+        tx.object(params.listing_id),
+        tx.object(params.payment),
       ],
     });
 
@@ -320,7 +320,7 @@ function mapMoveErrorCode(code: string) {
 ```typescript
 // frontend/src/components/Marketplace.tsx
 import { useMarketplaceAPI } from '../hooks/useMarketplaceAPI';
-import { useSignAndExecuteTransactionBlock } from '@mysten/dapp-kit';
+import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNFTPurchasedEvents } from '../hooks/useContractEvents';
 import { toast } from 'sonner';
@@ -328,7 +328,7 @@ import { toast } from 'sonner';
 export function Marketplace() {
   const api = useMarketplaceAPI();
   const queryClient = useQueryClient();
-  const { mutateAsync: signAndExecute } = useSignAndExecuteTransactionBlock();
+  const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
 
   // Fetch listings
   const { data: listings } = useQuery({
@@ -349,7 +349,7 @@ export function Marketplace() {
         listing_id: listingId,
         payment: '0x...',
       });
-      return await signAndExecute({ transactionBlock: txb });
+      return await signAndExecute({ transaction: tx });
     },
     onSuccess: () => {
       toast.success('Purchase successful!');

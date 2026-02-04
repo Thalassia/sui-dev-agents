@@ -28,6 +28,22 @@ sui-deployer deploy --network testnet --verify
 sui-deployer deploy --network mainnet
 ```
 
+## SUI v1.64 Deployment Updates (Protocol 109)
+
+**CLI changes (January 2026):**
+- **publish/upgrade flag fix:** Fixed `sui client publish | upgrade` handling of flags like `--dry-run`. Use flags correctly now.
+- **`--no-tree-shaking` flag:** New flag for `--dump-bytecode-as-base64`. Keeps all dependencies in the JSON output regardless of usage. By default, unused dependencies are removed on publication/upgrade.
+- **Compatibility verification:** Now enabled by default (was opt-in). Your deployments will automatically verify compatibility.
+- **Protocol Version 109** is current on mainnet.
+
+```bash
+# Publish with dry-run (now works correctly)
+sui client publish --dry-run --gas-budget 100000000
+
+# Preserve all dependencies in bytecode dump
+sui client publish --dump-bytecode-as-base64 --no-tree-shaking
+```
+
 ## Deployment Stages
 
 ### Stage 1: Devnet Deployment

@@ -99,24 +99,24 @@ public fun create_royalty_policy<T>(
 ## Frontend Integration
 
 ```typescript
-import { TransactionBlock } from '@mysten/sui.js/transactions';
+import { Transaction } from '@mysten/sui/transactions';
 
 // List NFT for sale
 async function listNFT(kioskId: string, nftId: string, price: number) {
-  const txb = new TransactionBlock();
+  const tx = new Transaction();
 
-  txb.moveCall({
+  tx.moveCall({
     target: '0x2::kiosk::place_and_list',
     arguments: [
-      txb.object(kioskId),
-      txb.object(kioskOwnerCapId),
-      txb.object(nftId),
-      txb.pure(price)
+      tx.object(kioskId),
+      tx.object(kioskOwnerCapId),
+      tx.object(nftId),
+      tx.pure(price)
     ],
     typeArguments: [`${PACKAGE_ID}::nft::NFT`]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 
 // Purchase NFT
@@ -126,28 +126,28 @@ async function purchaseNFT(
   paymentCoinId: string,
   policyId: string
 ) {
-  const txb = new TransactionBlock();
+  const tx = new Transaction();
 
-  txb.moveCall({
+  tx.moveCall({
     target: '0x2::kiosk::purchase',
     arguments: [
-      txb.object(kioskId),
-      txb.pure(nftId),
-      txb.object(paymentCoinId)
+      tx.object(kioskId),
+      tx.pure(nftId),
+      tx.object(paymentCoinId)
     ],
     typeArguments: [`${PACKAGE_ID}::nft::NFT`]
   });
 
   // Confirm transfer policy
-  txb.moveCall({
+  tx.moveCall({
     target: '0x2::transfer_policy::confirm_request',
     arguments: [
-      txb.object(policyId),
+      tx.object(policyId),
       // ... transfer request
     ]
   });
 
-  return await signAndExecute({ transactionBlock: txb });
+  return await signAndExecute({ transaction: tx });
 }
 ```
 

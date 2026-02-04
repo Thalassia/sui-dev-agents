@@ -95,6 +95,33 @@ sui move test
 
 See [scripts/](scripts/) for implementation details.
 
+## SUI v1.64 Updates (Protocol 109)
+
+**Key changes affecting Move development (as of January 2026):**
+
+- **TxContext Flexible Positioning:** `TxContext` arguments can now appear in any position within PTBs, not just the last parameter. Entry functions are more flexible.
+- **Entry Function Signature Check Disabled:** Signature check for entry functions is disabled at the protocol level. Move compiler changes will follow.
+- **poseidon_bn254 Enabled:** The `poseidon_bn254` hash function is now available on all networks (devnet, testnet, mainnet). Use `sui::poseidon::poseidon_bn254` for zero-knowledge proof applications.
+- **Address Alias (Testnet):** Address alias feature is enabled on testnet, allowing human-readable address mappings.
+- **Gas Schedule Update (v1.62):** Major gas cost changes:
+  - First-time dynamic field loads cost more
+  - Repeated access within same transaction is significantly cheaper
+  - `MoveLoc` instruction reduced in cost
+  - Median transaction gas decrease of ~21.5%
+  - Test with realistic gas budgets as costs have shifted
+- **Hot Potato Rule:** Non-public entry functions cannot have arguments entangled with hot potatoes, ensuring transaction atomicity per package developer specifications.
+- **DeepBook No Longer Implicit:** Since v1.47, DeepBook is no longer an implicit dependency. Add it explicitly in `Move.toml` if needed.
+
+### Move Language Updates (from Move Book)
+
+- **Extensions:** New chapter on Move extensions for extending module capabilities
+- **Modes:** New chapter on Move modes (`#[test_only]`, etc.) for conditional compilation
+- **Storage Rewrite:** Updated storage model documentation with latest patterns
+- **Type Reflection v2:** Enhanced type reflection capabilities for advanced metaprogramming
+- **BCS Improvements:** Better BCS serialization documentation and patterns
+- **Lambda Type Annotations:** Type annotations are now supported on lambdas
+- **Regex Test Filtering:** Test filtering now uses regex (replacing substring matching) - use `sui move test --filter "regex_pattern"`
+
 ## Core Features
 
 ### 1. Code Generation from Specification

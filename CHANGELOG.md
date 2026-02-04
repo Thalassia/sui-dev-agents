@@ -5,6 +5,75 @@ All notable changes to the SUI Dev Agents plugin will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-05
+
+### Updated
+
+#### SUI Platform Updates (v1.62 - v1.64, Protocol 109)
+- **TxContext Flexible Positioning:** Updated all skills/agents to reflect that `TxContext` arguments can now appear in any position within PTBs
+- **Entry Function Changes:** Documented disabled signature check and hot potato rule for non-public entry functions
+- **poseidon_bn254:** Documented availability on all networks for zero-knowledge proof applications
+- **Address Alias:** Documented testnet availability of address alias feature
+- **Gas Schedule Updates (v1.62):** Added documentation for dynamic field cost changes (~21.5% median gas decrease)
+- **DeepBook Explicit Dependency:** Added note that DeepBook must be explicitly added to `Move.toml` since v1.47
+
+#### TypeScript SDK Updates
+- **Package Rename:** Updated all code examples from `@mysten/sui.js` → `@mysten/sui`
+- **Transaction Rename:** Updated all code examples from `TransactionBlock` → `Transaction` (variable convention: `tx` instead of `txb`)
+- **Hook Rename:** Updated `useSignAndExecuteTransactionBlock` → `useSignAndExecuteTransaction`
+- **Import Paths:** Updated to `@mysten/sui/client`, `@mysten/sui/transactions`
+
+#### GraphQL API Updates (v1.64)
+- **New Query Fields:** `Query.node(id: ID!)`, `MoveValue.extract/format/asAddress`, `DynamicFieldName.literal`
+- **Balance API Change:** `Balance.totalBalance` now sums owned coins + accumulator objects
+- **SuiNS API Restructure:** `Query.suinsName` → `Query.address(name: ...)`, `defaultSuinsName` → `defaultNameRecord.target`
+- **JSON Blob Support:** `effectsJson`, `transactionJson`, `balanceChangeEffectJson` fields
+- **Rich Query Limit:** Single budget enforcing database request limits per GraphQL request
+
+#### CLI Updates (v1.64)
+- **publish/upgrade fix:** Fixed flag handling for `sui client publish | upgrade`
+- **`--no-tree-shaking` flag:** New flag for preserving all dependencies in bytecode dump
+- **Compatibility Verification:** Now enabled by default
+
+#### Move Language Updates (from Move Book)
+- **Extensions:** New chapter on Move extensions
+- **Modes:** New chapter on Move modes and `#[test_only]` attribute
+- **Storage Rewrite:** Updated storage model documentation
+- **Type Reflection v2:** Enhanced type reflection capabilities
+- **Lambda Type Annotations:** Type annotations now supported on lambdas
+- **Regex Test Filtering:** Test filtering now uses regex instead of substring matching
+
+### Skills Updated (14 files)
+- `sui-developer` - Protocol changes, Move language updates
+- `sui-frontend` - SDK rename, GraphQL API changes, Balance API
+- `sui-deployer` - CLI changes, Protocol 109
+- `sui-suins` - GraphQL API restructure
+- `sui-tester` - Gas schedule, regex filtering
+- `sui-architect` - Platform considerations
+- `sui-deepbook` - Explicit dependency requirement
+- `sui-kiosk` - SDK updates
+- `sui-walrus` - SDK updates
+- `sui-zklogin` - SDK updates
+- `sui-passkey` - SDK updates
+- `sui-seal` - SDK updates
+- `sui-nautilus` - SDK updates
+- `sui-full-stack` - SDK reference update
+
+### Agents Updated (5 files)
+- `sui-supreme` - Platform version info
+- `sui-developer-subagent` - Protocol version, Move 2024 Edition
+- `sui-frontend-subagent` - SDK naming
+- `sui-deployer-subagent` - CLI changes
+- `sui-tester-subagent` - Regex filtering
+
+### Reference Files Updated (4 files)
+- `sui-frontend/references/reference.md` - Complete GraphQL API documentation
+- `sui-fullstack-integration/references/examples.md` - SDK updates
+- `sui-developer/references/examples.md` - SDK updates
+- `sui-full-stack/references/phases.md` - SDK reference
+
+---
+
 ## [1.0.0] - 2026-02-02
 
 ### Added
@@ -85,4 +154,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.1.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v1.1.0
 [1.0.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v1.0.0
