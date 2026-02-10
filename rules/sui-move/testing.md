@@ -265,3 +265,4 @@ sui move test --coverage
 - [ ] Edge cases covered (zero amounts, max values, empty strings)
 - [ ] Gas costs documented for expensive operations
 - [ ] Time/epoch-dependent logic tested with mocks
+- [ ] Monkey testing: extreme inputs (0, MAX_U64, empty vectors, max-length strings)
