@@ -4,7 +4,7 @@ Execute the **sui-frontend** skill to build TypeScript frontend.
 
 ## Platform Version
 
-SDK: `@mysten/sui` (not `@mysten/sui.js`), `Transaction` (not `TransactionBlock`), `useSignAndExecuteTransaction` (not `useSignAndExecuteTransactionBlock`). GraphQL v1.64: MoveValue API, Balance.totalBalance change, SuiNS API restructured.
+SDK: `@mysten/sui` (not `@mysten/sui.js`), `Transaction` (not `TransactionBlock`), `useSignAndExecuteTransaction` (not `useSignAndExecuteTransactionBlock`). v1.65.1 (Protocol 110): gRPC (GA, primary), GraphQL (beta, frontend/indexer), JSON-RPC (**deprecated**, removed April 2026). Balance API split (coinBalance/addressBalance).
 
 ## Instructions
 

@@ -1,6 +1,6 @@
 # SUI Dev Agents
 
-Complete toolkit for building production-ready SUI blockchain applications with integrated skills and agents.
+**v2.1.0** - Complete toolkit for building production-ready SUI blockchain applications with skills, agents, commands, hooks, and rules. Now with **gRPC support** (JSON-RPC deprecated April 2026).
 
 ## 📦 Installation
 
@@ -57,7 +57,18 @@ Task({
 
 ## 📦 What's Included
 
-### Skills (18 User-Invocable Commands)
+### Commands (7 Fast Operations)
+
+Quick, focused operations for common tasks:
+- `/sui-dev-agents:init` - Initialize new Move project
+- `/sui-dev-agents:build` - Build contracts with verification
+- `/sui-dev-agents:test` - Run comprehensive tests
+- `/sui-dev-agents:deploy` - Deploy to network
+- `/sui-dev-agents:audit` - Security audit
+- `/sui-dev-agents:upgrade` - Upgrade contracts
+- `/sui-dev-agents:gas` - Gas usage report
+
+### Skills (19 User-Invocable Skills)
 
 **Core Orchestrator:**
 - `/sui-full-stack` - Complete end-to-end project workflow with Git integration
@@ -100,13 +111,58 @@ Task({
 - Architecture, development, frontend, testing, deployment subagents
 - Ecosystem-specific subagents (Kiosk, zkLogin, DeepBook, Walrus, etc.)
 
+### Hooks (Automatic Verification)
+
+Three lifecycle hooks for automation:
+- **PostToolUse** - Auto-verify Move syntax after edits
+- **SessionStart** - Show active SUI environment
+- **Stop** - Warn if test_only code in production
+
+### Rules (Best Practices)
+
+Installable coding standards:
+- `sui-move/conventions.md` - Move coding patterns
+- `sui-move/security.md` - Security guidelines
+- `sui-move/testing.md` - Test patterns
+- `common/code-quality.md` - Code quality rules
+
+Install: `bash scripts/install-rules.sh`
+
+### Developer Tools
+
+- `.mcp.json` - MCP server template
+- `.lsp.json` - move-analyzer LSP config
+
+### Examples
+
+Complete starter projects:
+- `starter-nft/` - NFT collection with Kiosk
+- `starter-defi/` - DeFi AMM
+- `starter-dao/` - DAO governance
+- `CLAUDE.md` - Project instructions template
+
+### Scripts
+
+Utility scripts:
+- `install-rules.sh` - Install rules to ~/.claude/rules/
+- `check-sui-env.sh` - Verify SUI environment
+- `protocol-version-check.sh` - Check protocol version
+- `gas-report.sh` - Generate gas report
+
 ## 🏗️ Architecture
 
-### Two-Tier System
+### Three-Tier System
+
+**Commands** - Fast, focused operations:
+- Single-purpose tasks
+- Minimal interaction
+- Quick execution
+- Example: `/sui-dev-agents:build` to compile contracts
 
 **Skills** - Direct user invocation for specific tasks:
-- Simple, focused functionality
-- Executed immediately
+- More complex than commands
+- Interactive workflows
+- Immediate execution
 - Example: `/sui-architect` to plan architecture
 
 **Agents** - Complex multi-step orchestration:
@@ -115,32 +171,47 @@ Task({
 - Inter-agent communication
 - Example: `sui-supreme` orchestrates entire project
 
-### Agent Hierarchy
+### Component Hierarchy
 
 ```
-sui-supreme (Supreme Orchestrator)
-├── sui-core-agent (Full-Stack Workflows)
-│   └── sui-full-stack-subagent
-├── sui-infrastructure-agent (Infrastructure Services)
-│   ├── sui-docs-query-subagent
-│   └── sui-security-guard-subagent
-├── sui-development-agent (Development Lifecycle)
-│   ├── sui-architect-subagent
-│   ├── sui-developer-subagent
-│   ├── sui-frontend-subagent
-│   ├── sui-tester-subagent
-│   └── sui-deployer-subagent
-└── sui-ecosystem-agent (Ecosystem Integrations)
-    ├── sui-kiosk-subagent
-    ├── sui-zklogin-subagent
-    ├── sui-deepbook-subagent
-    ├── sui-walrus-subagent
-    └── [5 more ecosystem subagents]
+Commands (7)           Skills (19)              Agents (23)
+    ↓                      ↓                         ↓
+  init              sui-full-stack          sui-supreme
+  build             sui-architect           ├── sui-core-agent
+  test              sui-developer           ├── sui-infrastructure-agent
+  deploy            sui-frontend            ├── sui-development-agent
+  audit             sui-tester              └── sui-ecosystem-agent
+  upgrade           sui-deployer                 └── [18 subagents]
+  gas               [13 more skills]
+
+        ↓
+    Hooks (3)               Rules (4)
+PostToolUse             sui-move/conventions.md
+SessionStart            sui-move/security.md
+Stop                    sui-move/testing.md
+                        common/code-quality.md
 ```
+
+See `docs/ARCHITECTURE.md` for detailed component interactions.
 
 ## 📖 Usage Examples
 
-### Example 1: Complete New Project
+### Example 1: Quick Start (Commands)
+
+```bash
+# Fast iteration workflow
+/sui-dev-agents:init               # 1. Initialize project
+# ... write some Move code ...
+/sui-dev-agents:build              # 2. Build & verify
+/sui-dev-agents:test               # 3. Run tests
+/sui-dev-agents:audit              # 4. Security scan
+/sui-dev-agents:deploy             # 5. Deploy to devnet
+/sui-dev-agents:gas                # 6. Check gas usage
+
+✅ Live on devnet in minutes!
+```
+
+### Example 2: Complete New Project (Skills)
 
 ```bash
 User: "Build an NFT marketplace"
@@ -158,7 +229,7 @@ User: "Build an NFT marketplace"
 ✅ Production-ready NFT marketplace with Git history!
 ```
 
-### Example 2: Add Feature to Existing Project
+### Example 3: Add Feature to Existing Project
 
 ```bash
 User: "Add zkLogin to my existing dApp"
@@ -167,11 +238,11 @@ User: "Add zkLogin to my existing dApp"
 /sui-zklogin              # Integration guide
 /sui-developer            # Modify contracts
 /sui-frontend             # Add auth UI
-/sui-tester               # Run tests
-/sui-deployer --upgrade   # Upgrade deployment
+/sui-dev-agents:test      # Run tests quickly
+/sui-dev-agents:upgrade   # Upgrade deployment
 ```
 
-### Example 3: Security Audit
+### Example 4: Security Audit
 
 ```bash
 /sui-security-guard --mode strict
@@ -180,6 +251,20 @@ User: "Add zkLogin to my existing dApp"
 → Checks for OWASP vulnerabilities
 → Validates Git hooks
 → Generates security report
+```
+
+### Example 5: Using Example Projects
+
+```bash
+# Start from template
+cp -r ~/.claude/plugins/sui-dev-agents/examples/starter-nft ./my-nft
+
+cd my-nft
+/sui-dev-agents:build
+/sui-dev-agents:test
+/sui-dev-agents:deploy
+
+✅ NFT project running in 60 seconds!
 ```
 
 ## 🔧 Configuration
@@ -200,20 +285,27 @@ Skills can be configured via `.sui-full-stack.json`:
 
 ## 🎯 Best Practices
 
-1. **Start with `/sui-full-stack`** for new projects - handles entire lifecycle
-2. **Use agents for complex tasks** - let `sui-supreme` orchestrate
-3. **Security first** - run `/sui-security-guard` before commits
-4. **Test-driven** - use `/sui-tester` throughout development
-5. **Git integration** - enable auto-commit for clean history
-6. **Ecosystem tools** - leverage SUI protocols (Kiosk, zkLogin, Walrus)
+1. **Install rules first** - `bash scripts/install-rules.sh` for consistent code quality
+2. **Start with commands** for quick iterations - `/sui-dev-agents:init`, `:build`, `:test`
+3. **Use `/sui-full-stack` skill** for new complete projects - handles entire lifecycle
+4. **Let hooks verify automatically** - PostToolUse hook checks syntax after edits
+5. **Use agents for complex tasks** - let `sui-supreme` orchestrate multi-step workflows
+6. **Security first** - run `/sui-dev-agents:audit` or `/sui-security-guard` before commits
+7. **Test-driven** - use `/sui-dev-agents:test` throughout development
+8. **Git integration** - enable auto-commit for clean history
+9. **Start from examples** - copy starter projects for faster setup
+10. **Ecosystem tools** - leverage SUI protocols (Kiosk, zkLogin, Walrus)
 
 ## 📚 Documentation
 
-- **Skills Documentation:** `skills/*/skill.md` files
-- **Agent Documentation:** `agents/*/prompt.md` files
-- **Quick Reference:** `docs/QUICKSTART.md`
-- **Architecture Guide:** `docs/ARCHITECTURE.md`
-- **Examples:** `docs/EXAMPLES.md`
+- **Quick Start:** `docs/QUICKSTART.md` - 5-minute introduction
+- **Complete Guide:** `docs/GUIDE.md` - Full usage guide (v2.0.0)
+- **Architecture:** `docs/ARCHITECTURE.md` - Component design (v2.0.0)
+- **Commands:** `commands/*.md` - Command reference
+- **Skills:** `skills/*/skill.md` - Skill documentation
+- **Agents:** `agents/*/prompt.md` - Agent documentation
+- **Rules:** `rules/**/*.md` - Coding conventions
+- **Examples:** `examples/` - Starter projects
 
 ## 🔗 Integration with CLAUDE.md
 

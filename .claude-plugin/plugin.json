@@ -1,7 +1,7 @@
 {
   "name": "sui-dev-agents",
-  "version": "1.0.0",
-  "description": "Complete SUI blockchain development toolkit with skills and agents for Move smart contracts, frontend integration, testing, and deployment",
+  "version": "2.1.0",
+  "description": "Complete SUI blockchain development toolkit with skills, agents, commands, hooks, and rules for Move smart contracts, frontend integration, testing, and deployment",
   "author": {
     "name": "Ramon Liao",
     "url": "https://x.com/RamonLiaoYC"
@@ -19,5 +19,45 @@
     "nft",
     "defi"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "agents": [
+    "./agents/sui-supreme.md",
+    "./agents/sui-core-agent.md",
+    "./agents/sui-infrastructure-agent.md",
+    "./agents/sui-development-agent.md",
+    "./agents/sui-ecosystem-agent.md",
+    "./agents/sui-architect-subagent.md",
+    "./agents/sui-developer-subagent.md",
+    "./agents/sui-frontend-subagent.md",
+    "./agents/sui-tester-subagent.md",
+    "./agents/sui-deployer-subagent.md",
+    "./agents/sui-kiosk-subagent.md",
+    "./agents/sui-walrus-subagent.md",
+    "./agents/sui-zklogin-subagent.md",
+    "./agents/sui-deepbook-subagent.md",
+    "./agents/sui-passkey-subagent.md",
+    "./agents/sui-docs-query-subagent.md",
+    "./agents/sui-security-guard-subagent.md",
+    "./agents/sui-fullstack-integration-subagent.md",
+    "./agents/supreme/sui-supreme-prompt.md",
+    "./agents/core/sui-core-agent-prompt.md",
+    "./agents/development/sui-development-agent-prompt.md",
+    "./agents/infrastructure/sui-infrastructure-agent-prompt.md",
+    "./agents/ecosystem/sui-ecosystem-agent-prompt.md",
+    "./agents/subagents/sui-architect-subagent-prompt.md",
+    "./agents/subagents/sui-developer-subagent-prompt.md",
+    "./agents/subagents/sui-frontend-subagent-prompt.md",
+    "./agents/subagents/sui-deployer-subagent-prompt.md",
+    "./agents/subagents/sui-tester-subagent-prompt.md",
+    "./agents/tests/test-agent-invocation.md",
+    "./agents/tests/end-to-end-test.md",
+    "./agents/EXAMPLES.md",
+    "./agents/USAGE.md",
+    "./agents/GLOBAL-SETUP.md",
+    "./agents/README.md"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "lspServers": "./.lsp.json"
 }

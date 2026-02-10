@@ -15,9 +15,9 @@ SuiNS provides:
 - Name ownership and trading
 - Subdomains support
 
-## SUI v1.64 SuiNS API Changes
+## SUI v1.65 SuiNS API Changes
 
-**GraphQL Breaking Changes (January 2026):**
+**GraphQL Breaking Changes:**
 - `Query.suinsName(name: ...)` → `Query.address(name: ...)` for resolving SuiNS names
 - `IAddressable.defaultSuinsName` → `IAddressable.defaultNameRecord.target` for reverse lookup
 - New `Query.nameRecord` for fetching the full SuiNS NameRecord for a given name
@@ -26,7 +26,7 @@ SuiNS provides:
 # Old (deprecated)
 query { suinsName(name: "alice.sui") { address } }
 
-# New (v1.64+)
+# New (v1.64+, current)
 query { address(name: "alice.sui") }
 query { nameRecord(name: "alice.sui") { ... } }
 ```

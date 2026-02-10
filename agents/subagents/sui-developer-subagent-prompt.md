@@ -4,7 +4,7 @@ Execute the **sui-developer** skill to generate Move smart contract code.
 
 ## Platform Version
 
-SUI Protocol 109 (mainnet v1.64.2). Key: TxContext flexible positioning, entry function signature check disabled, poseidon_bn254 on all networks, gas schedule v1.62 changes, DeepBook explicit dependency.
+SUI Protocol 110 (testnet v1.65.1, February 2026). Key: TxContext flexible positioning, poseidon_bn254 on all networks, gRPC replaces JSON-RPC, Balance API split (coinBalance/addressBalance).
 
 ## Instructions
 

@@ -56,7 +56,7 @@
 
 → Choose framework (React/Next.js/Vue)
 → Wallet integration (@mysten/dapp-kit)
-→ SDK setup (@mysten/sui.js)
+→ SDK setup (@mysten/sui)
 → API wrappers generated
 ```
 
@@ -111,6 +111,65 @@
 /sui-deepbook
 ```
 
+## ⚡ Commands (v2.0.0+)
+
+Fast, focused operations for common tasks:
+
+```bash
+/sui-dev-agents:init      # Initialize new Move project
+/sui-dev-agents:build     # Build Move contracts
+/sui-dev-agents:test      # Run Move tests
+/sui-dev-agents:deploy    # Deploy to network
+/sui-dev-agents:audit     # Security audit
+/sui-dev-agents:upgrade   # Upgrade contracts
+/sui-dev-agents:gas       # Gas usage report
+```
+
+### Command Examples
+
+```bash
+# Quick project setup
+/sui-dev-agents:init
+→ Creates project structure
+→ Configures Move.toml (Protocol 110)
+→ Generates template files
+→ Initializes git
+
+# Build with verification
+/sui-dev-agents:build
+→ Runs sui move build
+→ Shows compilation errors
+→ Verifies syntax
+
+# Run comprehensive tests
+/sui-dev-agents:test
+→ Unit tests
+→ Integration tests
+→ Gas benchmarks
+→ Coverage report
+```
+
+## 🪝 Hooks (Auto Verification)
+
+Plugin includes automatic verification hooks:
+
+### PostToolUse Hook
+- **Trigger:** After editing `.move` files
+- **Action:** Auto-runs `sui move build` to verify syntax
+- **Output:** Shows last 5 lines of build output
+
+### SessionStart Hook
+- **Trigger:** When Claude Code session starts
+- **Action:** Displays active SUI environment
+- **Output:** Shows current network (devnet/testnet/mainnet)
+
+### Stop Hook
+- **Trigger:** When session stops
+- **Action:** Warns if `#[test_only]` code leaked into `sources/`
+- **Output:** Shows files with test_only markers
+
+Configuration: `hooks/hooks.json`
+
 ## 🤖 Using Agents for Complex Tasks
 
 For multi-step orchestration:
@@ -138,6 +197,22 @@ Task({
 })
 ```
 
+## 📋 Rules & Best Practices
+
+Install recommended SUI Move conventions:
+
+```bash
+bash scripts/install-rules.sh
+```
+
+Installs to `~/.claude/rules/`:
+- `sui-move/conventions.md` - Move coding standards
+- `sui-move/security.md` - Security best practices
+- `sui-move/testing.md` - Test patterns
+- `common/code-quality.md` - General code quality
+
+Rules are automatically applied in all SUI projects.
+
 ## ⚙️ Configuration
 
 Create `.sui-full-stack.json` in your project:
@@ -153,28 +228,70 @@ Create `.sui-full-stack.json` in your project:
 }
 ```
 
+### LSP & MCP Servers
+
+Plugin includes templates for:
+- `.lsp.json` - move-analyzer LSP configuration
+- `.mcp.json` - MCP server template
+
+Copy to your project root if needed.
+
+## 📚 Example Projects
+
+Get started with templates:
+
+```bash
+# Copy NFT starter
+cp -r ~/.claude/plugins/sui-dev-agents/examples/starter-nft ./my-nft-project
+
+# Copy DeFi starter
+cp -r ~/.claude/plugins/sui-dev-agents/examples/starter-defi ./my-defi-project
+
+# Copy DAO starter
+cp -r ~/.claude/plugins/sui-dev-agents/examples/starter-dao ./my-dao-project
+```
+
+Each includes:
+- Move contracts with tests
+- TypeScript SDK integration
+- Frontend components
+- Deployment scripts
+- Documentation
+
+### CLAUDE.md Template
+
+Copy project-specific Claude instructions:
+
+```bash
+cp ~/.claude/plugins/sui-dev-agents/examples/CLAUDE.md ./.claude/
+```
+
 ## 🎓 Learning Path
 
 ### Beginner
 
-1. Run `/sui-full-stack` for guided project creation
-2. Explore generated code
-3. Modify contracts and re-test with `/sui-tester`
-4. Deploy to devnet with `/sui-deployer`
+1. Install rules: `bash scripts/install-rules.sh`
+2. Initialize project: `/sui-dev-agents:init`
+3. Run `/sui-full-stack` for guided project creation
+4. Explore generated code
+5. Modify contracts and test with `/sui-dev-agents:test`
+6. Deploy to devnet with `/sui-dev-agents:deploy`
 
 ### Intermediate
 
 1. Use individual skills for specific tasks
 2. Customize architecture with `/sui-architect`
 3. Integrate ecosystem tools (Kiosk, zkLogin)
-4. Deploy to testnet
+4. Use commands for faster iteration
+5. Deploy to testnet
 
 ### Advanced
 
 1. Use agents for complex orchestration
 2. Create custom workflows
 3. Extend with your own skills
-4. Production mainnet deployments
+4. Use hooks for automation
+5. Production mainnet deployments
 
 ## 🆘 Getting Help
 
@@ -182,20 +299,35 @@ Create `.sui-full-stack.json` in your project:
 # View skill documentation
 cat ~/.claude/plugins/sui-dev-agents/skills/sui-full-stack/skill.md
 
+# Check command reference
+ls ~/.claude/plugins/sui-dev-agents/commands/
+
 # Check agent hierarchy
 cat ~/.claude/plugins/sui-dev-agents/agents/README.md
 
 # Tool selection guide
 /sui-tools-guide
+
+# Check installed rules
+ls ~/.claude/rules/sui-move/
 ```
 
 ## 📦 Next Steps
 
 1. ✅ Read full README: `README.md`
-2. ✅ Check examples: `docs/EXAMPLES.md`
+2. ✅ Complete guide: `docs/GUIDE.md`
 3. ✅ Understand architecture: `docs/ARCHITECTURE.md`
-4. ✅ Build your first dApp!
+4. ✅ Install rules: `bash scripts/install-rules.sh`
+5. ✅ Try example projects: `examples/`
+6. ✅ Build your first dApp!
 
 ---
 
-**Happy building on SUI! 🚀**
+## ⚠️ API Migration Notice
+
+**JSON-RPC is deprecated** and will be removed in **April 2026**.
+- New projects should use **gRPC** (GA) or **GraphQL** (beta) for data access
+- The `@mysten/sui` SDK handles this automatically for most use cases
+- See `skills/sui-frontend/references/grpc-reference.md` for migration guide
+
+**Happy building on SUI!**

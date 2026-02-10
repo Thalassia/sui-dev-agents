@@ -50,7 +50,22 @@ Complete SDK API reference and advanced patterns.
 - `useSignTransaction()` - Sign transaction only
 - `useSignPersonalMessage()` - Sign message
 
-## GraphQL API (v1.64+)
+## gRPC API (v1.65+, GA)
+
+> **JSON-RPC is deprecated** (removed April 2026). See [grpc-reference.md](grpc-reference.md) for full migration guide.
+
+gRPC is now the primary full node API with 7 services:
+- `TransactionExecutionService` — Execute/simulate transactions
+- `LedgerService` — Checkpoints, transactions, epochs
+- `StateService` — Objects, balances, coins, dynamic fields
+- `SubscriptionService` — Real-time event/transaction streaming (replaces WebSocket)
+- `MovePackageService` — Package and module queries
+- `SignatureVerificationService` — Off-chain signature verification
+- `NameService` — SuiNS resolution
+
+**SDK users:** `@mysten/sui` `SuiClient` handles gRPC transport automatically. No code changes needed for most operations.
+
+## GraphQL API (v1.64-v1.65)
 
 ### New Fields
 

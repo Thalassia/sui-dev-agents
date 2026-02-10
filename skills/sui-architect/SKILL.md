@@ -26,19 +26,19 @@ sui-architect
 sui-full-stack  # → Phase 1: Architecture
 ```
 
-## SUI v1.64 Architecture Considerations (Protocol 109)
+## SUI v1.65 Architecture Considerations (Protocol 110)
 
 When designing architectures, account for these recent platform changes:
 
-- **Protocol Version 109** (mainnet as of January 2026)
-- **TxContext Flexible Positioning:** Entry functions no longer require `TxContext` as the last parameter. Design function signatures more naturally.
-- **poseidon_bn254:** Now available on all networks for zero-knowledge proof applications. Consider for privacy-preserving features.
+- **Protocol Version 110** (testnet v1.65.1, February 2026)
+- **Data Access:** gRPC (GA, primary), GraphQL (beta, frontend/indexer), JSON-RPC (**deprecated**, removed April 2026)
+- **Balance API Split:** `coinBalance` (fungible coins only) and `addressBalance` (all balance types)
+- **TxContext Flexible Positioning:** Entry functions no longer require `TxContext` as the last parameter.
+- **poseidon_bn254:** Available on all networks for zero-knowledge proof applications.
 - **Address Alias (Testnet):** Human-readable address mappings available on testnet. Plan for mainnet availability.
-- **Gas Schedule Changes (v1.62):** Dynamic field operations have new cost profiles. Design data structures considering repeated access is cheaper, first-time loads more expensive.
 - **Entry Function Changes:** Signature check disabled; non-public entry functions cannot have hot-potato-entangled arguments.
 - **DeepBook Explicit Dependency:** Since v1.47, DeepBook must be added explicitly to `Move.toml`.
 - **SDK Naming:** `@mysten/sui` (not `@mysten/sui.js`), `Transaction` (not `TransactionBlock`)
-- **GraphQL API:** New `MoveValue` extraction, `Balance.totalBalance` behavior change, SuiNS API restructured
 
 ## Core Workflow
 

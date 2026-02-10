@@ -4,7 +4,7 @@ Execute the **sui-tester** skill for comprehensive testing.
 
 ## Platform Version
 
-SUI v1.64: Regex test filtering (`--filter "pattern"`), gas schedule changes (dynamic fields), poseidon_bn254 available.
+SUI v1.65.1 (Protocol 110, February 2026): Regex test filtering (`--filter "pattern"`), poseidon_bn254 available, gRPC data access (GA).
 
 ## Instructions
 

@@ -95,21 +95,16 @@ sui move test
 
 See [scripts/](scripts/) for implementation details.
 
-## SUI v1.64 Updates (Protocol 109)
+## SUI v1.65 Updates (Protocol 110)
 
-**Key changes affecting Move development (as of January 2026):**
+**Key changes affecting Move development (as of February 2026):**
 
-- **TxContext Flexible Positioning:** `TxContext` arguments can now appear in any position within PTBs, not just the last parameter. Entry functions are more flexible.
-- **Entry Function Signature Check Disabled:** Signature check for entry functions is disabled at the protocol level. Move compiler changes will follow.
-- **poseidon_bn254 Enabled:** The `poseidon_bn254` hash function is now available on all networks (devnet, testnet, mainnet). Use `sui::poseidon::poseidon_bn254` for zero-knowledge proof applications.
+- **gRPC Data Access (GA):** gRPC is now the primary data access method, replacing JSON-RPC (deprecated, removed April 2026). GraphQL remains available for frontend/indexer use.
+- **Balance API Split:** `coinBalance` (fungible coins only) and `addressBalance` (all balance types) replace the previous unified Balance query.
+- **TxContext Flexible Positioning:** `TxContext` arguments can appear in any position within PTBs.
+- **poseidon_bn254 Enabled:** Available on all networks. Use `sui::poseidon::poseidon_bn254` for zero-knowledge proof applications.
 - **Address Alias (Testnet):** Address alias feature is enabled on testnet, allowing human-readable address mappings.
-- **Gas Schedule Update (v1.62):** Major gas cost changes:
-  - First-time dynamic field loads cost more
-  - Repeated access within same transaction is significantly cheaper
-  - `MoveLoc` instruction reduced in cost
-  - Median transaction gas decrease of ~21.5%
-  - Test with realistic gas budgets as costs have shifted
-- **Hot Potato Rule:** Non-public entry functions cannot have arguments entangled with hot potatoes, ensuring transaction atomicity per package developer specifications.
+- **Hot Potato Rule:** Non-public entry functions cannot have arguments entangled with hot potatoes.
 - **DeepBook No Longer Implicit:** Since v1.47, DeepBook is no longer an implicit dependency. Add it explicitly in `Move.toml` if needed.
 
 ### Move Language Updates (from Move Book)

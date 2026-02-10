@@ -18,7 +18,7 @@ This skill provides comprehensive frontend development support for SUI applicati
 - Event listening and real-time updates
 - State management patterns
 
-## SUI SDK & API Updates (v1.64, January 2026)
+## SUI SDK & API Updates (v1.65, February 2026)
 
 **Breaking SDK changes:**
 - **Package renamed:** `@mysten/sui.js` → `@mysten/sui` (update all imports)
@@ -26,11 +26,22 @@ This skill provides comprehensive frontend development support for SUI applicati
 - **Hook renamed:** `useSignAndExecuteTransactionBlock` → `useSignAndExecuteTransaction`
 - **Import paths:** `@mysten/sui/client`, `@mysten/sui/transactions` (no `.js`)
 
-**GraphQL API changes (v1.64):**
+**Data Access Migration (CRITICAL):**
+- **JSON-RPC is deprecated** and will be removed in **April 2026**
+- **gRPC is now GA** — primary API for full node interaction (7 services)
+- **GraphQL** remains beta, best for frontend/Relay-style queries
+- SDK (`@mysten/sui`) handles transport automatically — no code changes for most users
+- **`subscribeEvent` via WebSocket** is replaced by gRPC streaming internally
+- Direct `fetch()` calls to JSON-RPC endpoints must be migrated
+- See [grpc-reference.md](references/grpc-reference.md) for migration guide
+
+**GraphQL API changes (v1.64-v1.65):**
 - `Query.node(id: ID!)` for Global Identification Specification (Relay support)
 - `effectsJson` / `transactionJson` fields for JSON blob returns
 - `MoveValue.extract`, `MoveValue.format`, `MoveValue.asAddress` for value manipulation
-- `Balance.totalBalance` now sums owned coins + accumulator objects; use `Balance.coinBalance` for previous behavior
+- `Balance.totalBalance` now sums owned coins + accumulator objects
+  - Use `Balance.coinBalance` for coin-only balance (previous behavior)
+  - Use `Balance.addressBalance` for address-specific balance
 - SuiNS: `Query.suinsName` → `Query.address(name: ...)`, `defaultSuinsName` → `defaultNameRecord.target`
 - Single "rich query" limit enforces database request budgets per GraphQL request
 - `DynamicFieldName.literal` for providing dynamic field names as Display v2 literals
@@ -410,6 +421,7 @@ Next: Ready for full-stack integration with sui-fullstack-integration?
 ## See Also
 
 - [reference.md](references/reference.md) - Complete SDK API reference, hooks documentation
+- [grpc-reference.md](references/grpc-reference.md) - gRPC API reference, JSON-RPC migration guide
 - [examples.md](references/examples.md) - Complete component examples, integration patterns
 
 ---

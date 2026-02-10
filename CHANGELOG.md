@@ -5,6 +5,97 @@ All notable changes to the SUI Dev Agents plugin will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-11
+
+### Added
+
+#### gRPC Migration (JSON-RPC Deprecated)
+- **New reference:** `skills/sui-frontend/references/grpc-reference.md` — Complete gRPC API guide with 7 services, migration table, connection examples
+- **New rule:** `rules/common/api-migration.md` — Enforces gRPC/GraphQL usage over deprecated JSON-RPC
+- **New hook:** PostToolUse JSON-RPC detection — Warns when JSON-RPC patterns found in TS/JS files
+
+### Changed
+
+#### Protocol & Version Updates
+- **Protocol Version:** 109 → 110 (testnet v1.65.1)
+- **plugin.json:** Version bump to 2.1.0
+- **sui-supreme-prompt.md:** Updated platform version, added gRPC as primary data access
+
+#### JSON-RPC → gRPC Migration
+- **`scripts/protocol-version-check.sh`:** Replaced JSON-RPC query with `sui client` CLI, JSON-RPC as fallback with deprecation warning
+- **`skills/sui-frontend/SKILL.md`:** Added data access migration section, gRPC reference link, Balance API split details
+- **`skills/sui-deployer/SKILL.md`:** Added gRPC endpoint table, RPC migration notice
+- **`skills/sui-frontend/references/reference.md`:** Added gRPC API section with 7 service descriptions
+- **`.mcp.json`:** Updated with gRPC/GraphQL endpoint examples, deprecated JSON-RPC reference
+
+#### GraphQL v1.65 Updates
+- **Balance API clarification:** `Balance.coinBalance` (coin-only), `Balance.addressBalance` (address-specific)
+
+#### Documentation
+- **`README.md`:** Version bump, gRPC mention
+- **`docs/GUIDE.md`:** Added data access architecture section (gRPC vs GraphQL vs Indexer)
+- **`docs/QUICKSTART.md`:** Fixed SDK package name, added API migration notice, updated protocol version
+- **`hooks/hooks.json`:** Added JSON-RPC detection hook
+
+---
+
+## [2.0.0] - 2026-02-11
+
+### Added
+
+#### Commands (7 total)
+New fast-track commands for common operations:
+- `/sui-dev-agents:init` - Initialize new SUI Move project with proper structure
+- `/sui-dev-agents:build` - Build Move contracts with verification
+- `/sui-dev-agents:test` - Run comprehensive test suite
+- `/sui-dev-agents:deploy` - Deploy contracts to network
+- `/sui-dev-agents:audit` - Security audit and vulnerability scan
+- `/sui-dev-agents:upgrade` - Upgrade deployed contracts
+- `/sui-dev-agents:gas` - Generate gas usage report
+
+#### Hooks System
+Automatic verification and safety checks:
+- **PostToolUse Hook** - Auto-verify Move syntax after editing `.move` files
+- **SessionStart Hook** - Display active SUI environment on session start
+- **Stop Hook** - Warn if `#[test_only]` code leaked into production sources
+- Configuration: `hooks/hooks.json`
+
+#### Rules & Best Practices
+Installable coding conventions and standards:
+- `rules/sui-move/conventions.md` - Move coding standards and patterns
+- `rules/sui-move/security.md` - Security best practices and vulnerability prevention
+- `rules/sui-move/testing.md` - Test patterns and gas optimization
+- `rules/common/code-quality.md` - General code quality guidelines
+- `scripts/install-rules.sh` - Auto-installer to `~/.claude/rules/`
+
+#### Developer Tools
+- `.mcp.json` - MCP server template configuration
+- `.lsp.json` - move-analyzer LSP configuration for IDE integration
+
+#### Example Projects
+Complete starter templates:
+- `examples/starter-nft/` - NFT collection with Kiosk integration
+- `examples/starter-defi/` - DeFi AMM with liquidity pools
+- `examples/starter-dao/` - DAO governance with voting
+- `examples/CLAUDE.md` - Project-specific Claude instructions template
+
+#### Utility Scripts
+- `scripts/install-rules.sh` - Install rules to user's Claude config
+- `scripts/check-sui-env.sh` - Verify SUI CLI environment
+- `scripts/protocol-version-check.sh` - Check protocol version compatibility
+- `scripts/gas-report.sh` - Generate detailed gas usage report
+
+### Changed
+- **plugin.json** - Updated to v2.0.0 with new component declarations
+- **Directory Structure** - Added `commands/`, `hooks/`, `rules/`, `examples/`, `scripts/`
+- **Documentation** - Updated README, QUICKSTART, added GUIDE.md and ARCHITECTURE.md
+
+### Infrastructure
+- Hooks system for automated verification
+- Rules installation system
+- Command registration system
+- Enhanced project scaffolding
+
 ## [1.1.0] - 2026-02-05
 
 ### Updated
@@ -140,13 +231,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Future Roadmap
 
-### Planned for v1.1.0
+### Planned for v2.2.0
 - Enhanced error recovery mechanisms
 - Additional ecosystem protocol integrations
 - Performance optimization for large projects
 - Interactive tutorial mode
 
-### Planned for v1.2.0
+### Planned for v2.3.0
 - CI/CD pipeline integration
 - Advanced monitoring and analytics
 - Multi-language frontend support
@@ -154,5 +245,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.1.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v2.1.0
+[2.0.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v2.0.0
 [1.1.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v1.1.0
 [1.0.0]: https://github.com/ramonliao/sui-dev-agents/releases/tag/v1.0.0
