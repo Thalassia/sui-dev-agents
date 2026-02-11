@@ -1,3 +1,7 @@
+> # 🚀 This project has moved! Future updates will be at [first-mover-tw/sui-dev-agents](https://github.com/first-mover-tw/sui-dev-agents)
+
+---
+
 # SUI Dev Agents
 
 **v2.1.0** - Complete toolkit for building production-ready SUI blockchain applications with skills, agents, commands, hooks, and rules. Now with **gRPC support** (JSON-RPC deprecated April 2026).
